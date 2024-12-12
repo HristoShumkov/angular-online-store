@@ -1,0 +1,23 @@
+<div class='flex-center'>
+    <div class='container-default'>
+      <!-- <h1 style="textAlign: 'center'; marginTop: 0">Login</h1> -->
+      <h1>Login</h1>
+      <!-- <form method="POST" onSubmit={submitHandler}> -->
+      <form method="POST">
+        <label htmlFor='email'>Email</label>
+        <div class="input-field">
+          <!-- <input type='email' id='email' name='email' value={values.email} onChange={changeHandler} /> -->
+          <input type='email' id='email' name='email' />
+        </div>
+        <label htmlFor='password'>Password</label>
+        <div class='input-field'>
+          <!-- <input type='password' id='password' name='password' value={values.password} onChange={changeHandler} /> -->
+          <input type='password' id='password' name='password' />
+        </div>
+          <!-- {error && <span class="error-text">{error}</span>} -->
+        <input type='submit' value='Login' class='btn-main btn-submit' />
+      </form>
+      <div class='divider'></div>
+      <a routerLink="/register"><button class='btn-secondary btn-submit'>Create New Account</button></a>
+    </div>
+  </div>

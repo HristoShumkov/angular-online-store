@@ -1,0 +1,25 @@
+<nav>
+    <a routerLink="/"><img src="/buystuff-logo.png" id="logo" alt="buyStuff Logo" /></a>
+    <div class='align-center'>
+      <a routerLink="/items"><button class="btn-secondary">Shop</button></a>
+      <!-- {!isAuthenticated && ( -->
+        <a routerLink="/login"><button class="btn-main">Sign in</button></a>
+      <!-- )} -->
+      <!-- {isAuthenticated && ( -->
+        <!-- <div class='button-secondary' id='user-button' onClick={() => setToggle(!toggle)}> -->
+          <!-- <p>John</p>
+          <img src="default-profile-picture.png" alt='pfp' class='pfp-icon' /> -->
+          <!-- {(toggle && isAuthenticated) && ( -->
+            <!-- <ul class='option-container'>
+              <a href='#'><li class='button-secondary'>My Profile</li></a>
+              <a href='#'><li class='button-secondary'>My Cart</li></a>
+              <a href='#'><li class='button-secondary'>Sell Item</li></a>
+              <div class='divider'></div>
+              <a href="#"><li class='button-secondary'>Logout</li></a>
+            </ul> -->
+          <!-- )} -->
+        <!-- </div> -->
+      <!-- )
+      } -->
+    </div>
+  </nav >
