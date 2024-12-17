@@ -2,13 +2,13 @@
     <div class="container-half">
         <button class="btn-secondary">Back</button>
         <div id="image-container">
-            <img src="https://www.fractal-design.com/app/uploads/2023/05/Terra_KV_Jade_5-2560.jpg" alt="Fancy smol puter" id="item-image" />
+            <img src="{{item.imageUrl}}" alt="Fancy smol puter" id="item-image" />
         </div>
-        <h1 id="item-title">Fancy smol puter</h1>
+        <h1 id="item-title">{{item.title}}</h1>
     </div>
     <div class="container-half">
-        <p id="item-category">Category: Electronics</p>
-        <p id="item-price">$5000</p>
+        <p id="item-category">Category: {{item.category}}</p>
+        <p id="item-price">${{item.price}}</p>
         <!-- {isAuthenticated && ( -->
             <div id="btn-container">
                 <!-- {isOwner(item._ownerId) ? ( -->
@@ -30,6 +30,6 @@
             </div>
         <!-- )} -->
         <div class="divider"></div>
-        <p id="item-description">Very powerful but very compact. Although still above average...</p>
+        <p id="item-description">{{item.description}}</p>
     </div>
 </div>

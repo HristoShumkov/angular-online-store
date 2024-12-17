@@ -1,0 +1,13 @@
+#catalog-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#items-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    max-width: 1250px;
+}
+
