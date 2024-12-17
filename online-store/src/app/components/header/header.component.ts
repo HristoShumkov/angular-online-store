@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -9,5 +10,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  constructor(private userService: UsersService) {};
 
+  get isLoggedIn():boolean {
+    return this.userService.isLogged;
+  }
 }
