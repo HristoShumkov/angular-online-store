@@ -27,4 +27,15 @@ export class UsersService {
     let url = `${BASE_URL}/users/login`;
     return this.http.post<User>(url, {email, password}).pipe(tap((user) => this.user$$.next(user)));;
   }
+
+  register(
+    email: string,
+    username: string,
+    password: string,
+    profilePic: string
+  ) {
+    const { BASE_URL } = environment;
+    let url = `${BASE_URL}/users/register`;
+    return this.http.post<User>(url, {email, username, password, profilePic}).pipe(tap((user) => this.user$$.next(user)));;
+  }
 }

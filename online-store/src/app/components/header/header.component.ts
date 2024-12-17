@@ -18,6 +18,14 @@ export class HeaderComponent {
     return this.userService.isLogged;
   }
 
+  get username():string {
+    return this.userService.user?.username || '';
+  }
+
+  get pfpUrl():string {
+    return this.userService.user?.profilePic || 'default-profile-picture.png';
+  }
+
   toggleMenu() {
     this.isMenuToggled = !this.isMenuToggled
   }

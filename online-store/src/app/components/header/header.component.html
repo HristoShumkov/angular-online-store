@@ -6,8 +6,8 @@
     <a routerLink="/login"><button class="btn-main">Sign in</button></a>
     } @else {
     <div class='btn-secondary' id='user-btn' (click)="toggleMenu()">
-      <p>John</p>
-      <img src="default-profile-picture.png" alt='pfp' class='pfp-icon' />
+      <p>{{username}}</p>
+      <img src="{{ pfpUrl }}" alt='pfp' class='pfp-icon' />
       @if(isMenuToggled) {
       <ul class='option-container'>
         <a href='#'>
