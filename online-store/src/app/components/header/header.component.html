@@ -5,17 +5,27 @@
     @if(!isLoggedIn) {
     <a routerLink="/login"><button class="btn-main">Sign in</button></a>
     } @else {
-    <div class='button-secondary' id='user-button'>
+    <div class='btn-secondary' id='user-btn' (click)="toggleMenu()">
       <p>John</p>
       <img src="default-profile-picture.png" alt='pfp' class='pfp-icon' />
+      @if(isMenuToggled) {
+      <ul class='option-container'>
+        <a href='#'>
+          <li class='btn-secondary'>My Profile</li>
+        </a>
+        <a href='#'>
+          <li class='btn-secondary'>My Cart</li>
+        </a>
+        <a href='#'>
+          <li class='btn-secondary'>Sell Item</li>
+        </a>
+        <div class='divider'></div>
+        <a href="#">
+          <li class='btn-secondary'>Logout</li>
+        </a>
+      </ul>
+      }
     </div>
     }
-    <!-- <ul class='option-container'>
-              <a href='#'><li class='button-secondary'>My Profile</li></a>
-              <a href='#'><li class='button-secondary'>My Cart</li></a>
-              <a href='#'><li class='button-secondary'>Sell Item</li></a>
-              <div class='divider'></div>
-              <a href="#"><li class='button-secondary'>Logout</li></a>
-            </ul> -->
   </div>
 </nav>

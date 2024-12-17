@@ -12,7 +12,13 @@ import { UsersService } from '../../services/users.service';
 export class HeaderComponent {
   constructor(private userService: UsersService) {};
 
+  isMenuToggled: boolean = false;
+
   get isLoggedIn():boolean {
     return this.userService.isLogged;
+  }
+
+  toggleMenu() {
+    this.isMenuToggled = !this.isMenuToggled
   }
 }
