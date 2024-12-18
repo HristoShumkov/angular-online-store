@@ -28,6 +28,10 @@ export class UsersService {
     return localStorage.getItem('token') || '';
   }
 
+  isOwner(ownerId: string) {
+    return this.user?._id === ownerId;
+  }
+
   user: User | null = this.getUserFromLocalStorage();
   get isLoggedIn(): boolean {
     return !!this.user;

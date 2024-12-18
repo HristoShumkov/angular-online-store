@@ -11,7 +11,7 @@
         <p id="item-price">${{item.price}}</p>
         @if(isLoggedIn) {
         <div id="btn-container">
-            @if(isOwner()) {
+            @if(isOwner) {
             <button class="btn-secondary" (click)="deleteItem(itemId)">Delete</button>
             <a routerLink="/edit/{{itemId}}" class="btn-main">Edit</a>
             }

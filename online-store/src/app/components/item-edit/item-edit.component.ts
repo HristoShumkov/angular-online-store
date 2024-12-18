@@ -3,6 +3,7 @@ import { ItemService } from '../../services/items.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Item } from '../../types/item';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-item-edit',
@@ -12,9 +13,14 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './item-edit.component.css'
 })
 export class ItemEditComponent {
-  constructor(private route: ActivatedRoute, private itemService: ItemService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private itemService: ItemService, private userService: UsersService, private router: Router) { }
 
   itemId = ''
+  itemOwnerId = '';
+
+  get isOwner():boolean {
+    return this.userService.isOwner(this.itemOwnerId);
+  } 
 
   itemEditForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -37,9 +43,8 @@ export class ItemEditComponent {
         description: item.description,
         imageUrl: item?.imageUrl
       });
+      this.itemOwnerId = item._ownerId;
     })
-
-
   }
 
   editItem() {

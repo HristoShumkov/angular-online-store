@@ -29,10 +29,8 @@ export class ItemDetailsComponent implements OnInit {
     return this.userService.isLoggedIn;
   }
 
-  isOwner() {
-    console.log(this.userService.user?._id);
-    console.log(this.item._ownerId);
-    return this.userService.user?._id === this.item._ownerId;
+  get isOwner():boolean {
+    return this.userService.isOwner(this.item._ownerId)
   }
 
   itemId = '';

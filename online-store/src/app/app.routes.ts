@@ -9,16 +9,17 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 import { ItemSellComponent } from './components/item-sell/item-sell.component';
 import { ItemEditComponent } from './components/item-edit/item-edit.component';
 import { UserCartComponent } from './components/user-cart/user-cart.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {path: "", component: HomeComponent},
     {path: "login", component: LoginComponent},
     {path: "register", component: RegisterComponent},
     { path: "items/:category", component: ItemCatalogComponent },
-    { path: "user", component: UserDetailsComponent },
     { path: "item/:id", component: ItemDetailsComponent },
-    { path: "sell-item", component: ItemSellComponent},
-    { path: "edit/:id", component: ItemEditComponent},
-    { path: "user/cart", component: UserCartComponent},
+    { path: "sell-item", canActivate: [AuthGuard], component: ItemSellComponent},
+    { path: "user", canActivate: [AuthGuard], component: UserDetailsComponent },
+    { path: "edit/:id", canActivate: [AuthGuard], component: ItemEditComponent},
+    { path: "user/cart", canActivate: [AuthGuard], component: UserCartComponent},
     { path: '**', component: ErrorPageComponent },
 ];

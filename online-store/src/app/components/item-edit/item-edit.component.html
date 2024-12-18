@@ -1,42 +1,50 @@
 <div class="flex-center">
-    <div class="container-default">
-        <h1>Edit Item</h1>
-        <form [formGroup]="itemEditForm" (ngSubmit)="editItem()">
-            <label htmlFor="title">Title</label>
-            <div class="input-field">
-                <input type="text" id="title" name="title" required formControlName="title"/>
-                <!-- {errors.title && <span class='error-text'>{errors.title}</span>} -->
-            </div>
-            <label htmlFor="price">Price</label>
-            <div class="input-field">
-                <input type="number" id="price" name="price" required formControlName="price"/>
-                <!-- {errors.price && <span class='error-text'>{errors.price}</span>} -->
-            </div>
-            <label htmlFor="category">Category</label>
-            <div class="input-field">
-                <select id="select-input" name="category" required formControlName="category">
-                    <option value="" selected disabled hidden>Choose a category</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Home & Garden">Home & Garden</option>
-                    <option value="Sports">Sports</option>
-                </select>
-                <!-- {errors.category && <span class='error-text'>{errors.category}</span>} -->
-            </div>
-            <label htmlFor="description">Item Description</label>
-            <div class="input-field">
-                <input type="text" id="description" name="description" required formControlName="description"/>
-                <!-- {errors.description && <span class='error-text'>{errors.description}</span>} -->
-            </div>
-            <label htmlFor="imageUrl">Photo of Item</label>
-            <div class="input-field">
-                <input type="text" id="image-url" name="imageUrl" formControlName="imageUrl"/>
-            </div>
-            <div id="btn-container">
-                <input type="submit" value="Submit" class="btn-main btn-submit" />
-                <a routerLink="/item/{{itemId}}" class="btn-secondary btn-submit">Cancel</a>
-            </div>
-        </form>
-    </div>
+    @if (isOwner) {
+        <div class="container-default">
+            <h1>Edit Item</h1>
+            <form [formGroup]="itemEditForm" (ngSubmit)="editItem()">
+                <label htmlFor="title">Title</label>
+                <div class="input-field">
+                    <input type="text" id="title" name="title" required formControlName="title"/>
+                    <!-- {errors.title && <span class='error-text'>{errors.title}</span>} -->
+                </div>
+                <label htmlFor="price">Price</label>
+                <div class="input-field">
+                    <input type="number" id="price" name="price" required formControlName="price"/>
+                    <!-- {errors.price && <span class='error-text'>{errors.price}</span>} -->
+                </div>
+                <label htmlFor="category">Category</label>
+                <div class="input-field">
+                    <select id="select-input" name="category" required formControlName="category">
+                        <option value="" selected disabled hidden>Choose a category</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Home & Garden">Home & Garden</option>
+                        <option value="Sports">Sports</option>
+                    </select>
+                    <!-- {errors.category && <span class='error-text'>{errors.category}</span>} -->
+                </div>
+                <label htmlFor="description">Item Description</label>
+                <div class="input-field">
+                    <input type="text" id="description" name="description" required formControlName="description"/>
+                    <!-- {errors.description && <span class='error-text'>{errors.description}</span>} -->
+                </div>
+                <label htmlFor="imageUrl">Photo of Item</label>
+                <div class="input-field">
+                    <input type="text" id="image-url" name="imageUrl" formControlName="imageUrl"/>
+                </div>
+                <div id="btn-container">
+                    <input type="submit" value="Submit" class="btn-main btn-submit" />
+                    <a routerLink="/item/{{itemId}}" class="btn-secondary btn-submit">Cancel</a>
+                </div>
+            </form>
+        </div>
+    } @else {
+        <div class="error-page-container">
+            <h1>UNAUTHORIZED</h1>
+            <p>YOU ARE NOT THE OWNER OF THIS ITEM</p>
+            <a routerLink="/" class="btn-main">Go Back Home</a>
+        </div>
+    }
 </div>
