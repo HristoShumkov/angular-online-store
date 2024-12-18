@@ -14,6 +14,11 @@ import { HttpClient } from "@angular/common/http";
       return this.http.get<Item[]>(url);
     }
 
+    getItemsByCategory(categoryParams: string) {
+      let url = `/url/data/items?where=category%3D%22${categoryParams}%22`
+      return this.http.get<Item[]>(url);
+    }
+
     getSingleItem(id: string) {
       let url = `/url/data/items/${id}`;
       return this.http.get<Item>(url);
