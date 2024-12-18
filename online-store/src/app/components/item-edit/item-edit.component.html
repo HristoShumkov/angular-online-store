@@ -1,20 +1,20 @@
 <div class="flex-center">
     <div class="container-default">
         <h1>Edit Item</h1>
-        <form method="POST" onSubmit={submitHandler}>
+        <form [formGroup]="itemEditForm" (ngSubmit)="editItem()">
             <label htmlFor="title">Title</label>
             <div class="input-field">
-                <input type="text" id="title" name="title"/>
+                <input type="text" id="title" name="title" required formControlName="title"/>
                 <!-- {errors.title && <span class='error-text'>{errors.title}</span>} -->
             </div>
             <label htmlFor="price">Price</label>
             <div class="input-field">
-                <input type="number" id="price" name="price" />
+                <input type="number" id="price" name="price" required formControlName="price"/>
                 <!-- {errors.price && <span class='error-text'>{errors.price}</span>} -->
             </div>
             <label htmlFor="category">Category</label>
             <div class="input-field">
-                <select id="select-input" name="category">
+                <select id="select-input" name="category" required formControlName="category">
                     <option value="" selected disabled hidden>Choose a category</option>
                     <option value="Clothing">Clothing</option>
                     <option value="Electronics">Electronics</option>
@@ -26,16 +26,16 @@
             </div>
             <label htmlFor="description">Item Description</label>
             <div class="input-field">
-                <input type="text" id="description" name="description" />
+                <input type="text" id="description" name="description" required formControlName="description"/>
                 <!-- {errors.description && <span class='error-text'>{errors.description}</span>} -->
             </div>
             <label htmlFor="imageUrl">Photo of Item</label>
             <div class="input-field">
-                <input type="text" id="image-url" name="imageUrl" />
+                <input type="text" id="image-url" name="imageUrl" formControlName="imageUrl"/>
             </div>
             <div id="btn-container">
                 <input type="submit" value="Submit" class="btn-main btn-submit" />
-                <a href="#" class="btn-secondary btn-submit">Cancel</a>
+                <a routerLink="/item/{{itemId}}" class="btn-secondary btn-submit">Cancel</a>
             </div>
         </form>
     </div>

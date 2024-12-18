@@ -12,11 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ItemSellComponent {
   constructor(private itemService: ItemService, private router: Router) { }
-  // title: string,
-  // price: number,
-  // category: string,
-  // description: string,
-  // imageUrl: string,
+
   itemSellForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
     price: new FormControl(0, [Validators.required]),

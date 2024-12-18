@@ -23,5 +23,10 @@ import { HttpClient } from "@angular/common/http";
       let url = '/url/data/items';
       return this.http.post<Item>(url, item);
     }
+
+    updateItem(item: object, id: string) {
+      let url = `/url/data/items/${id}`;
+      return this.http.put<Item>(url, item);
+    }
   }
   
