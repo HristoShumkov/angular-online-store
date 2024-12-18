@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { UsersService } from '../../services/users.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private userService: UsersService) {};
+  constructor(private userService: UsersService, private router: Router) {};
 
   isMenuToggled: boolean = false;
 
@@ -28,5 +28,9 @@ export class HeaderComponent {
 
   toggleMenu() {
     this.isMenuToggled = !this.isMenuToggled
+  }
+
+  logout() {
+    this.userService.logout().subscribe(() => this.router.navigate(["/"]));
   }
 }

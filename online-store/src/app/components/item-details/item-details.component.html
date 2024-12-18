@@ -13,7 +13,7 @@
             <div id="btn-container">
                 <!-- {isOwner(item._ownerId) ? ( -->
                     <!-- <> -->
-                        <button class="btn-secondary">Delete</button>
+                        <button class="btn-secondary"  (click)="deleteItem(itemId)">Delete</button>
                         <a routerLink="/edit/{{itemId}}" class="btn-main">Edit</a>
                     <!-- </> -->
                 <!-- ) : (

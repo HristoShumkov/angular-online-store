@@ -10,7 +10,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 export class UsersService {
   private user$$ = new BehaviorSubject<User | null>(this.getUserFromLocalStorage());
   private user$ = this.user$$.asObservable();
-  
+
   private saveUserToLocalStorage(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
   }
@@ -23,7 +23,7 @@ export class UsersService {
   private saveAccessToken(token: string) {
     localStorage.setItem("token", token);
   }
-  
+
   getAccessToken() {
     return localStorage.getItem('token') || '';
   }
@@ -38,17 +38,18 @@ export class UsersService {
       this.user = user;
       if (user) {
         this.saveUserToLocalStorage(user);
+      } else {
+        localStorage.removeItem("user");
       }
     });
   }
 
 
   login(email: string, password: string) {
-    const { BASE_URL } = environment;
-    let url = `${BASE_URL}/users/login`;
-    return this.http.post<User>(url, {email, password}).pipe(tap((user) => {
-      this.saveAccessToken(user.accessToken)
-      this.user$$.next(user)
+    let url = `/url/users/login`;
+    return this.http.post<User>(url, { email, password }).pipe(tap((user) => {
+      this.saveAccessToken(user.accessToken);
+      this.user$$.next(user);
     }));;
   }
 
@@ -58,9 +59,19 @@ export class UsersService {
     password: string,
     profilePic: string
   ) {
-    const { BASE_URL } = environment;
-    let url = `${BASE_URL}/users/register`;
-    return this.http.post<User>(url, {email, username, password, profilePic}).pipe(tap((user) => this.user$$.next(user)));;
+    let url = `/url/users/register`;
+    return this.http.post<User>(url, { email, username, password, profilePic })
+      .pipe(tap((user) => {
+        this.saveAccessToken(user.accessToken);
+        this.user$$.next(user);
+      }));;
   }
 
+  logout() {
+    let url = `/url/users/logout`;
+    return this.http.get<User>(url).pipe(tap((user) => {
+      localStorage.removeItem("token");
+      this.user$$.next(null);
+    }));;
+  }
 }
