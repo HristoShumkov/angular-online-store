@@ -11,9 +11,11 @@ import { UsersService } from '../../services/users.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  loginError = false;
   constructor(private userService: UsersService, private router: Router) {}
   login(form: NgForm) {
     if(form.invalid) {
+      this.loginError = true;
       return;
     }
 
