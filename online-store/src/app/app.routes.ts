@@ -10,11 +10,12 @@ import { ItemSellComponent } from './components/item-sell/item-sell.component';
 import { ItemEditComponent } from './components/item-edit/item-edit.component';
 import { UserCartComponent } from './components/user-cart/user-cart.component';
 import { AuthGuard } from './guards/auth.guard';
+import { loggedUserGuard } from './guards/logged-user.guard';
 
 export const routes: Routes = [
     {path: "", component: HomeComponent},
-    {path: "login", component: LoginComponent},
-    {path: "register", component: RegisterComponent},
+    {path: "login", canActivate: [loggedUserGuard], component: LoginComponent},
+    {path: "register", canActivate: [loggedUserGuard], component: RegisterComponent},
     { path: "items/:category", component: ItemCatalogComponent },
     { path: "item/:id", component: ItemDetailsComponent },
     { path: "sell-item", canActivate: [AuthGuard], component: ItemSellComponent},
