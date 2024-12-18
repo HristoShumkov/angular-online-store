@@ -11,6 +11,7 @@ export class UsersService {
   private user$$ = new BehaviorSubject<User | null>(null);
   private user$ = this.user$$.asObservable();
 
+  USER_KEY = '[user]';
   user: User | null = null;
   get isLogged(): boolean {
     return !!this.user;

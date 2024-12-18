@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../enviroments/environment";
 import { Item } from "../types/item";
 import { HttpClient } from "@angular/common/http";
 
@@ -11,15 +10,18 @@ import { HttpClient } from "@angular/common/http";
     constructor(private http: HttpClient) { }
   
     getAllItems() {
-      const { BASE_URL } = environment;
-      let url = `${BASE_URL}/data/items`;
+      let url = '/url/data/items';
       return this.http.get<Item[]>(url);
     }
 
     getSingleItem(id: string) {
-      const { BASE_URL } = environment;
-      let url = `${BASE_URL}/data/items/${id}`;
+      let url = `/url/data/items/${id}`;
       return this.http.get<Item>(url);
+    }
+
+    sellItem(item: object) {
+      let url = '/url/data/items';
+      return this.http.post<Item>(url, item);
     }
   }
   
