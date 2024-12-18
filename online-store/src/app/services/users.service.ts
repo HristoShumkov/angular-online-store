@@ -8,11 +8,27 @@ import { BehaviorSubject, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  private user$$ = new BehaviorSubject<User | null>(null);
+  private user$$ = new BehaviorSubject<User | null>(this.getUserFromLocalStorage());
   private user$ = this.user$$.asObservable();
+  
+  private saveUserToLocalStorage(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
 
-  USER_KEY = '[user]';
-  user: User | null = null;
+  private getUserFromLocalStorage() {
+    const userJSON = localStorage.getItem('user');
+    return userJSON ? JSON.parse(userJSON) : null;
+  }
+
+  private saveAccessToken(token: string) {
+    localStorage.setItem("token", token);
+  }
+  
+  getAccessToken() {
+    return localStorage.getItem('token') || '';
+  }
+
+  user: User | null = this.getUserFromLocalStorage();
   get isLogged(): boolean {
     return !!this.user;
   }
@@ -20,13 +36,20 @@ export class UsersService {
   constructor(private http: HttpClient) {
     this.user$.subscribe((user) => {
       this.user = user;
+      if (user) {
+        this.saveUserToLocalStorage(user);
+      }
     });
   }
+
 
   login(email: string, password: string) {
     const { BASE_URL } = environment;
     let url = `${BASE_URL}/users/login`;
-    return this.http.post<User>(url, {email, password}).pipe(tap((user) => this.user$$.next(user)));;
+    return this.http.post<User>(url, {email, password}).pipe(tap((user) => {
+      this.saveAccessToken(user.accessToken)
+      this.user$$.next(user)
+    }));;
   }
 
   register(
@@ -39,4 +62,5 @@ export class UsersService {
     let url = `${BASE_URL}/users/register`;
     return this.http.post<User>(url, {email, username, password, profilePic}).pipe(tap((user) => this.user$$.next(user)));;
   }
+
 }

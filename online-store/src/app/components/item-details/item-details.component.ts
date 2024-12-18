@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Item } from '../../types/item';
@@ -15,11 +16,13 @@ import { ActivatedRoute } from '@angular/router';
 export class ItemDetailsComponent implements OnInit {
   faShoppingCart = faShoppingCart;
   item = {} as Item;
-  constructor(private route: ActivatedRoute, private itemService: ItemService) {}
+  constructor(private route: ActivatedRoute, private itemService: ItemService, private location: Location) {}
 
+  toPreviousPage() {
+    this.location.back();
+  }
 
   ngOnInit(): void {
-    console.log(this.item)
     const id = this.route.snapshot.params["id"];
 
     this.itemService.getSingleItem(id).subscribe((item) => {

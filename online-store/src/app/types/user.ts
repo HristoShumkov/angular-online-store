@@ -4,5 +4,6 @@ export interface User {
     password: string,
     profilePic: string,
     createdOn: string,
-    _id: string
+    _id: string,
+    accessToken: string,
 }
