@@ -5,6 +5,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Item } from '../../types/item';
 import { ItemService } from '../../services/items.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-item-details',
@@ -19,9 +20,20 @@ export class ItemDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService,
+    private userService: UsersService,
     private location: Location,
     private router: Router
   ) { }
+
+  get isLoggedIn():boolean {
+    return this.userService.isLoggedIn;
+  }
+
+  isOwner() {
+    console.log(this.userService.user?._id);
+    console.log(this.item._ownerId);
+    return this.userService.user?._id === this.item._ownerId;
+  }
 
   itemId = '';
 

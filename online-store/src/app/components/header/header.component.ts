@@ -15,7 +15,7 @@ export class HeaderComponent {
   isMenuToggled: boolean = false;
 
   get isLoggedIn():boolean {
-    return this.userService.isLogged;
+    return this.userService.isLoggedIn;
   }
 
   get username():string {

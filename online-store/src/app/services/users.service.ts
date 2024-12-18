@@ -29,7 +29,7 @@ export class UsersService {
   }
 
   user: User | null = this.getUserFromLocalStorage();
-  get isLogged(): boolean {
+  get isLoggedIn(): boolean {
     return !!this.user;
   }
 

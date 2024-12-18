@@ -9,26 +9,19 @@
     <div class="container-half">
         <p id="item-category">Category: {{item.category}}</p>
         <p id="item-price">${{item.price}}</p>
-        <!-- {isAuthenticated && ( -->
-            <div id="btn-container">
-                <!-- {isOwner(item._ownerId) ? ( -->
-                    <!-- <> -->
-                        <button class="btn-secondary"  (click)="deleteItem(itemId)">Delete</button>
-                        <a routerLink="/edit/{{itemId}}" class="btn-main">Edit</a>
-                    <!-- </> -->
-                <!-- ) : (
-                    isInCart ? -->
-                         <a href="#" class="btn-secondary">Check Item in Cart</a>
-                        <!-- : -->
-                         <!-- <button class="button-secondary" onClick={() => {
-                            addToCart(item._id);
-                            setIsInCart(true);
-                        }}> -->
-                         <button class="btn-secondary">
-                        <fa-icon [icon]="faShoppingCart" /> Add to Cart</button>
-                <!-- )} -->
-            </div>
-        <!-- )} -->
+        @if(isLoggedIn) {
+        <div id="btn-container">
+            @if(isOwner()) {
+            <button class="btn-secondary" (click)="deleteItem(itemId)">Delete</button>
+            <a routerLink="/edit/{{itemId}}" class="btn-main">Edit</a>
+            }
+            @else{
+            <!-- <a href="#" class="btn-secondary">Check Item in Cart</a> -->
+            <button class="btn-secondary">
+                <fa-icon [icon]="faShoppingCart" /> Add to Cart</button>
+            }
+        </div>
+        }
         <div class="divider"></div>
         <p id="item-description">{{item.description}}</p>
     </div>
