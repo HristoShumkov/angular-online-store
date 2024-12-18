@@ -3,7 +3,7 @@ export interface User {
     username: string,
     password: string,
     profilePic: string,
-    createdOn: string,
+    _createdOn: number,
     _id: string,
     accessToken: string,
 }

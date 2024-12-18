@@ -9,36 +9,14 @@
             <section id="shop-now">
                 <h1>Shop By Category</h1>
                 <section id="category-container">
-                    <a href="#">
-                        <div id="category-circle">
-                            <fa-icon [icon]="faCocktail"></fa-icon>
-                        </div>
-                        <p>Electronics</p>
-                    </a>
-                    <a href="#">
-                        <div id="category-circle">
-                            <fa-icon [icon]="faCocktail"></fa-icon>
-                        </div>
-                        <p>Electronics</p>
-                    </a>
-                    <a href="#">
-                        <div id="category-circle">
-                            <fa-icon [icon]="faCocktail"></fa-icon>
-                        </div>
-                        <p>Electronics</p>
-                    </a>
-                    <a href="#">
-                        <div id="category-circle">
-                            <fa-icon [icon]="faCocktail"></fa-icon>
-                        </div>
-                        <p>Electronics</p>
-                    </a>
-                    <a href="#">
-                        <div id="category-circle">
-                            <fa-icon [icon]="faCocktail"></fa-icon>
-                        </div>
-                        <p>Electronics</p>
-                    </a>
+                    @for(category of categoryData; track $index) {
+                        <a routerLink="/items{{category.link}}">
+                            <div id="category-circle">
+                                <fa-icon [icon]="category.icon"></fa-icon>
+                            </div>
+                            <p>{{category.name}}</p>
+                        </a>
+                    }
                 </section>
             </section>
         </div>

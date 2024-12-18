@@ -1,14 +1,14 @@
 <div id="user-details-container">
     <div id="user-info">
-        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTORR2uMHZNyzpEZwiAaQc5TC2szCCBY_z828Q6giqR28C6syDol-_HxF11QJMWF4tXtglnshoDuQlFpliN6uD5ug" id="user-details-profile-pic" />
-        <h1>Josh</h1>
+        <img src="{{pfpUrl}}" id="user-details-profile-pic" />
+        <h1>{{username}}</h1>
         <!-- <h1>Created on: {parseDate(createdOn)}</h1> -->
-        <h1>Created on: Recently</h1>
+        <h1>Created on: {{createdOn | date: "MMM d, y"}}</h1>
     </div>
     <div id="user-cart-container">
     <div id='user-cart-header'>
         <h2>My Cart</h2>
-        <a href='#' id='view-more'>View more</a>
+        <a routerLink="/user/cart" id='view-more'>View more</a>
     </div>
     <div id='user-cart'>
         <!-- {cartItems.length
