@@ -17,6 +17,8 @@ import { UsersService } from '../../services/users.service';
 export class ItemDetailsComponent implements OnInit {
   faShoppingCart = faShoppingCart;
   item = {} as Item;
+  isInCart = false;
+
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService,
@@ -31,6 +33,16 @@ export class ItemDetailsComponent implements OnInit {
 
   get isOwner():boolean {
     return this.userService.isOwner(this.item._ownerId)
+  }
+  
+  get userId(): string {
+    return this.userService.user?._id || '';
+  }
+  isInCartCheck() {
+    // this.itemService.getSingleCartItem(this.userId, this.itemId)
+    // .subscribe((item) => {
+    //   )
+    // });
   }
 
   itemId = '';
@@ -47,12 +59,22 @@ export class ItemDetailsComponent implements OnInit {
     }
   }
 
+  addToCart() {
+      this.itemService.addToCart(this.userId, this.itemId).subscribe({
+        next: () => console.log("success"),
+        error: (err) => console.error(err)
+      })
+  }
+
+
   ngOnInit(): void {
     const id = this.route.snapshot.params["id"];
     this.itemId = id;
 
     this.itemService.getSingleItem(id).subscribe((item) => {
       this.item = item;
+      this.isInCartCheck();
     })
+    console.log(this.isInCart)
   }
 }

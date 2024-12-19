@@ -16,9 +16,12 @@
             <a routerLink="/edit/{{itemId}}" class="btn-main">Edit</a>
             }
             @else{
-            <!-- <a href="#" class="btn-secondary">Check Item in Cart</a> -->
-            <button class="btn-secondary">
-                <fa-icon [icon]="faShoppingCart" /> Add to Cart</button>
+                @if (isInCart) {
+                        <button class="btn-secondary" (click)="addToCart()">
+                        <fa-icon [icon]="faShoppingCart"/> Add to Cart</button>
+                    } @else {
+                        <a href="#" class="btn-secondary">Check Item in Cart</a>
+                }
             }
         </div>
         }

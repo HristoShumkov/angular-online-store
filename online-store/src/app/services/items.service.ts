@@ -38,5 +38,15 @@ import { HttpClient } from "@angular/common/http";
       let url = `/url/data/items/${id}`;
       return this.http.delete<Item>(url);
     }
+
+    addToCart(userId: string, itemId: string) {
+      let url = `/url/data/cart/`;
+      return this.http.post(url, {userId: userId, itemId: itemId});
+    }
+
+    getSingleCartItem(userId: string, itemId: string) {
+      let url = `/url/data/cart?where=userId%3D%22${userId}%22%20AND%20itemId%3D%22${itemId}%22`;
+      return this.http.get(url);
+    }
   }
   

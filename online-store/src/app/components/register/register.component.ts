@@ -23,7 +23,7 @@ export class RegisterComponent {
         confirmPassword: new FormControl('', [Validators.required]),
       },
       {
-        validators: [passwordMatchValidator("password", "rePassword")]
+        validators: [passwordMatchValidator("password", "confirmPassword")]
       }
     ),
     profilePic: new FormControl('')
@@ -75,16 +75,16 @@ export class RegisterComponent {
     const {
       email,
       username,
-      password,
+      passGroup,
       profilePic,
     } = this.registerForm.value as {
       email: string;
       username: string;
-      password: string;
+      passGroup: { password: string; confirmPassword: string };
       profilePic: string
     };
 
-    this.userService.register(email, username, password, profilePic).subscribe(() => {
+    this.userService.register(email, username, passGroup.password, profilePic).subscribe(() => {
       this.router.navigate(["/"]);
     });
   }
