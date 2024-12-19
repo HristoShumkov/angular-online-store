@@ -23,12 +23,27 @@ export class ItemEditComponent {
   } 
 
   itemEditForm = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    price: new FormControl(0, [Validators.required]),
+    title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    price: new FormControl(0, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
     category: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required, Validators.minLength(40)]),
     imageUrl: new FormControl('')
   })
+
+  get titleErrorCheck() {
+    return this.itemEditForm.get("title")?.touched && this.itemEditForm.get("title")?.errors?.['required'] ||
+    this.itemEditForm.get("title")?.touched && this.itemEditForm.get("title")?.errors?.['minlength']
+  }
+
+  get priceErrorCheck() {
+    return this.itemEditForm.get("price")?.touched && this.itemEditForm.get("price")?.errors?.['required'] ||
+    this.itemEditForm.get("price")?.touched && this.itemEditForm.get("price")?.errors?.['pattern']
+  }
+
+  get descriptionErrorCheck() {
+    return this.itemEditForm.get("description")?.touched && this.itemEditForm.get("description")?.errors?.['required'] ||
+    this.itemEditForm.get("description")?.touched && this.itemEditForm.get("description")?.errors?.['minlength']
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params["id"];
@@ -49,6 +64,7 @@ export class ItemEditComponent {
 
   editItem() {
     if (this.itemEditForm.invalid) {
+      console.log(this.itemEditForm.errors)
       return;
     }
     const {

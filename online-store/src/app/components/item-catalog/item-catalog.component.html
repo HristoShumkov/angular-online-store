@@ -11,7 +11,7 @@
     <div class="divider"></div>
     <div id="items-list">
         @for (item of items; track $index) {
-            <app-item-preview [_id]="item._id" [imageUrl]="item.imageUrl" [title]="item.title" [price]="item.price"></app-item-preview>
+            <app-item-preview [_id]="item._id" [imageUrl]="item.imageUrl ? item.imageUrl : 'placeholder-image.png'" [title]="item.title" [price]="item.price"></app-item-preview>
             }
     </div>
 </div>

@@ -7,7 +7,7 @@
     } @else {
     <div class='btn-secondary' id='user-btn' (click)="toggleMenu()">
       <p>{{username}}</p>
-      <img src="{{ pfpUrl }}" alt='pfp' class='pfp-icon' />
+      <img [src]="pfpUrl ? pfpUrl : 'default-profile-picture.png'" alt='pfp' class='pfp-icon' />
       @if(isMenuToggled) {
       <ul class='option-container'>
         <a routerLink="/user">

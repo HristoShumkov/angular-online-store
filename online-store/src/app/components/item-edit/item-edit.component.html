@@ -4,36 +4,60 @@
             <h1>Edit Item</h1>
             <form [formGroup]="itemEditForm" (ngSubmit)="editItem()">
                 <label htmlFor="title">Title</label>
-                <div class="input-field">
-                    <input type="text" id="title" name="title" formControlName="title"/>
-                    <!-- {errors.title && <span class='error-text'>{errors.title}</span>} -->
-                </div>
-                <label htmlFor="price">Price</label>
-                <div class="input-field">
-                    <input type="number" id="price" name="price" formControlName="price"/>
-                    <!-- {errors.price && <span class='error-text'>{errors.price}</span>} -->
-                </div>
-                <label htmlFor="category">Category</label>
-                <div class="input-field">
-                    <select id="select-input" name="category" formControlName="category">
-                        <option value="" selected disabled hidden>Choose a category</option>
-                        <option value="Clothing">Clothing</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Home & Garden">Home & Garden</option>
-                        <option value="Sports">Sports</option>
-                    </select>
-                    <!-- {errors.category && <span class='error-text'>{errors.category}</span>} -->
-                </div>
-                <label htmlFor="description">Item Description</label>
-                <div class="input-field">
-                    <input type="text" id="description" name="description" formControlName="description"/>
-                    <!-- {errors.description && <span class='error-text'>{errors.description}</span>} -->
-                </div>
-                <label htmlFor="imageUrl">Photo of Item</label>
-                <div class="input-field">
-                    <input type="text" id="image-url" name="imageUrl" formControlName="imageUrl"/>
-                </div>
+            <div class="input-field">
+                <input [class]="titleErrorCheck ? 'error-input' : ''" type="text" id="title" name="title"
+                    formControlName="title" />
+                @if(itemEditForm.get("title")?.touched) {
+                @if(itemEditForm.get("title")?.errors?.['required']) {
+                <span class='error-text'>Please enter a title</span>
+                }
+                @if(itemEditForm.get("title")?.errors?.['minlength']) {
+                <span class='error-text'>Title must be at least 3 characters long</span>
+                }
+                }
+            </div>
+            <label htmlFor="price">Price</label>
+            <div class="input-field">
+                <input [class]="priceErrorCheck ? 'error-input' : ''" type="number" id="price" name="price"
+                    formControlName="price" />
+                @if(itemEditForm.get("price")?.touched) {
+                @if(itemEditForm.get("price")?.errors?.['required']) {
+                <span class='error-text'>Please enter a price</span>
+                }
+                @if(itemEditForm.get("price")?.errors?.['pattern']) {
+                <span class='error-text'>Please enter a valid price</span>
+                }
+                }
+            </div>
+            <label htmlFor="category">Category</label>
+            <div class="input-field">
+                <select [class]="itemEditForm.get('category')?.touched && itemEditForm.get('category')?.errors?.['required'] ? 'error-input' : ''" id="select-input" name="category" formControlName="category">
+                    <option value="" selected disabled hidden>Choose a category</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Home & Garden">Home & Garden</option>
+                    <option value="Sports">Sports</option>
+                </select>
+                @if(itemEditForm.get("category")?.touched) {
+                @if(itemEditForm.get("category")?.errors?.['required']) {
+                <span class='error-text'>Please enter a category</span>
+                }
+                }
+            </div>
+            <label htmlFor="description">Item Description</label>
+            <div class="input-field">
+                <input [class]="descriptionErrorCheck ? 'error-input' : ''" type="text" id="description" name="description" formControlName="description" />
+                @if(itemEditForm.get("description")?.touched) {
+                    @if(itemEditForm.get("description")?.errors?.['required'] || itemEditForm.get("description")?.errors?.['minlength']) {
+                    <span class='error-text'>Description must be at least 40 characters long</span>
+                    }
+                    }
+            </div>
+            <label htmlFor="imageUrl">Photo of Item</label>
+            <div class="input-field">
+                <input type="text" id="image-url" name="imageUrl" formControlName="imageUrl" />
+            </div>
                 <div id="btn-container">
                     <input type="submit" value="Submit" class="btn-main btn-submit" />
                     <a routerLink="/item/{{itemId}}" class="btn-secondary btn-submit">Cancel</a>

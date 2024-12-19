@@ -2,7 +2,7 @@
     <div class="container-half">
         <button class="btn-secondary" (click)="toPreviousPage()">Back</button>
         <div id="image-container">
-            <img src="{{item.imageUrl}}" alt="Item Image" id="item-image" />
+            <img [src]="item.imageUrl ? item.imageUrl : 'placeholder-image.png'" alt="Item Image" id="item-image" />
         </div>
         <h1 id="item-title">{{item.title}}</h1>
     </div>

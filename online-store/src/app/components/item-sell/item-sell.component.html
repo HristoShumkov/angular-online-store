@@ -4,17 +4,33 @@
         <form [formGroup]="itemSellForm" (ngSubmit)="SellItem()">
             <label htmlFor="title">Title</label>
             <div class="input-field">
-                <input type="text" id="title" name="title" formControlName="title"/>
-                <!-- {errors.title && <span class='error-text'>{errors.title}</span>} -->
+                <input [class]="titleErrorCheck ? 'error-input' : ''" type="text" id="title" name="title"
+                    formControlName="title" />
+                @if(itemSellForm.get("title")?.touched) {
+                @if(itemSellForm.get("title")?.errors?.['required']) {
+                <span class='error-text'>Please enter a title</span>
+                }
+                @if(itemSellForm.get("title")?.errors?.['minlength']) {
+                <span class='error-text'>Title must be at least 3 characters long</span>
+                }
+                }
             </div>
             <label htmlFor="price">Price</label>
             <div class="input-field">
-                <input type="number" id="price" name="price" formControlName="price"/>
-                <!-- {errors.price && <span class='error-text'>{errors.price}</span>} -->
+                <input [class]="priceErrorCheck ? 'error-input' : ''" type="number" id="price" name="price"
+                    formControlName="price" />
+                @if(itemSellForm.get("price")?.touched) {
+                @if(itemSellForm.get("price")?.errors?.['required']) {
+                <span class='error-text'>Please enter a price</span>
+                }
+                @if(itemSellForm.get("price")?.errors?.['pattern']) {
+                <span class='error-text'>Please enter a valid price</span>
+                }
+                }
             </div>
             <label htmlFor="category">Category</label>
             <div class="input-field">
-                <select id="select-input" name="category" formControlName="category">
+                <select [class]="itemSellForm.get('category')?.touched && itemSellForm.get('category')?.errors?.['required'] ? 'error-input' : ''" id="select-input" name="category" formControlName="category">
                     <option value="" selected disabled hidden>Choose a category</option>
                     <option value="Clothing">Clothing</option>
                     <option value="Electronics">Electronics</option>
@@ -22,16 +38,24 @@
                     <option value="Home & Garden">Home & Garden</option>
                     <option value="Sports">Sports</option>
                 </select>
-                <!-- {errors.category && <span class='error-text'>{errors.category}</span>} -->
+                @if(itemSellForm.get("category")?.touched) {
+                @if(itemSellForm.get("category")?.errors?.['required']) {
+                <span class='error-text'>Please enter a category</span>
+                }
+                }
             </div>
             <label htmlFor="description">Item Description</label>
             <div class="input-field">
-                <input type="text" id="description" name="description" formControlName="description"/>
-                <!-- {errors.description && <span class='error-text'>{errors.description}</span>} -->
+                <input [class]="descriptionErrorCheck ? 'error-input' : ''" type="text" id="description" name="description" formControlName="description" />
+                @if(itemSellForm.get("description")?.touched) {
+                    @if(itemSellForm.get("description")?.errors?.['required'] || itemSellForm.get("description")?.errors?.['minlength']) {
+                    <span class='error-text'>Description must be at least 40 characters long</span>
+                    }
+                    }
             </div>
             <label htmlFor="imageUrl">Photo of Item</label>
             <div class="input-field">
-                <input type="text" id="image-url" name="imageUrl" formControlName="imageUrl"/>
+                <input type="text" id="image-url" name="imageUrl" formControlName="imageUrl" />
             </div>
             <input type="submit" value="Submit" class="btn-main btn-submit" />
         </form>
