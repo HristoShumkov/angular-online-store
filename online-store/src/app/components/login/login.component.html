@@ -4,22 +4,21 @@
       <form #form="ngForm" (ngSubmit)="login(form)">
         <label htmlFor='email'>Email</label>
         <div class="input-field">
-          <input type='email' id='email' name='email' ngModel #email="ngModel" required/>
-          @if(email.touched && email.errors?.['required']) {
+          <input [class]="email?.touched && email.errors?.['required'] ? 'error-input' : ''" type='email' id='email' name='email' ngModel #email="ngModel" required/>
+          @if(email?.touched && email.errors?.['required']) {
             <span class="error-text">Please enter an email address</span>
           }
         </div>
         <label htmlFor='password'>Password</label>
         <div class='input-field'>
-          <input type='password' id='password' name='password' ngModel #password="ngModel" required/>
-          @if(password.touched && password.errors?.['required']) {
+          <input [class]="password?.touched && password.errors?.['required'] ? 'error-input' : ''" type='password' id='password' name='password' ngModel #password="ngModel" required/>
+          @if(password?.touched && password.errors?.['required']) {
             <span class="error-text">Please enter a password</span>
           }
         </div>
         @if(loginError) {
           <span class="error-text">Email or Password is incorrect</span>
         }
-          <!-- {error && <span class="error-text">{error}</span>} -->
         <input type='submit' value='Login' class='btn-main btn-submit' />
       </form>
       <div class='divider'></div>

@@ -1,41 +1,62 @@
 <div class='flex-center'>
-    <div class='container-default'>
-      <!-- <h1 style={{ textAlign: 'center', marginTop: 0 }}>Sign up</h1> -->
-      <h1>Sign up</h1>
-      <form [formGroup]="registerForm" (ngSubmit)="register()">
-        <label htmlFor='email'>Email</label>
-        <div class='input-field'>
-          <!-- <input class={errors.email && "error-input"} type='email' id='email' name='email' value={values.email} onChange={changeHandler} /> -->
-          <input type='email' id='email' name='email' required formControlName="email"/>
-          <!-- {errors.email && <span class='error-text'>{errors.email}</span>} -->
-        </div>
-        <label htmlFor='username'>Username</label>
-        <div class='input-field'>
-          <!-- <input class={errors.username && "error-input"} type='username' id='username' name='username' value={values.username} onChange={changeHandler} /> -->
-          <input type='username' id='username' name='username' required formControlName="username"/>
-          <!-- {errors.username && <span class='error-text'>{errors.username}</span>} -->
-        </div>
+  <div class='container-default'>
+    <h1>Sign up</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <label htmlFor='email'>Email</label>
+      <div class='input-field'>
+        <input [class]="emailErrorCheck ? 'error-input' : ''" type='email' id='email' name='email'
+          formControlName="email" />
+        @if(registerForm.get("email")?.touched) {
+        @if(registerForm.get("email")?.errors?.['required']) {
+        <span class='error-text'>Please enter an email</span>
+        }
+        @if(registerForm.get("email")?.errors?.['pattern']) {
+        <span class='error-text'>Please enter a valid email</span>
+        }
+        }
+      </div>
+      <label htmlFor='username'>Username</label>
+      <div class='input-field'>
+        <input [class]="usernameErrorCheck ? 'error-input' : ''" type='username' id='username' name='username'
+          formControlName="username" />
+        @if(registerForm.get("username")?.touched) {
+        @if(registerForm.get("username")?.errors?.['required'] || registerForm.get("username")?.errors?.['minlength']) {
+        <span class='error-text'>Username must be at least 3 characters long</span>
+        }
+        @if(registerForm.get("username")?.errors?.['pattern']) {
+        <span class='error-text'>Username must only contain letters, numbers, underscores and periods</span>
+        }
+        }
+      </div>
+      <div formGroupName="passGroup">
         <label htmlFor='password'>Password</label>
         <div class='input-field'>
-          <!-- <input class={errors.password && "error-input"} type='password' id='password' name='password' value={values.password} onChange={changeHandler} /> -->
-          <input type='password' id='password' name='password' required formControlName="password"/>
-          <!-- {errors.password && <span class='error-text'>{errors.password}</span>} -->
+          <input [class]="passErrorCheck ? 'error-input' : ''" type='password' id='password' name='password' formControlName="password" />
+          @if(passGroup?.get("password")?.touched) {
+          @if(passGroup?.get("password")?.errors?.['required'] || passGroup?.get("password")?.errors?.['minlength']) {
+          <span class='error-text'>Password must be at least 6 characters long</span>
+          }
+          @if(passGroup?.get("password")?.errors?.['pattern']) {
+          <span class='error-text'>Password must contain at least 1 uppercase, 1 lowercase, and 1 numeric
+            character</span>
+          }
+          }
         </div>
         <label htmlFor='confirm-password'>Confirm Password</label>
         <div class='input-field'>
-          <!-- <input class={errors.confirmPassword && "error-input"} type='password' id='confirm-password' name='confirmPassword' value={values.confirmPassword} onChange={changeHandler} /> -->
-          <input type='password' id='confirm-password' name='confirmPassword' required formControlName="confirmPassword"/>
-          <!-- {errors.confirmPassword && <span class='error-text'>{errors.confirmPassword}</span>} -->
+          <input [class]="passMatchErrorCheck ? 'error-input' : ''" type='password' id='confirm-password' name='confirmPassword' formControlName="confirmPassword" />
+          @if(passGroup?.get("confirmPassword")?.touched && passGroup?.errors?.['passwordMatchValidator']) {
+          <span class='error-text'>Password don't match</span>
+          }
         </div>
-        <label htmlFor='pfp'>Profile Pic</label>
-        <div class='input-field'>
-          <!-- <input type='text' id='profile-pic' name='profilePic' value={values.profilePic} onChange={changeHandler} /> -->
-          <input type='text' id='profile-pic' name='profilePic' formControlName="profilePic"/>
-        </div>
-        <input type='submit' value='Sign up' class='btn-main btn-submit' />
-      </form>
-      <div class='divider'></div>
-      <!-- <p style={{ textAlign: 'center' }}>Already have an account? <Link to='/login' id='to-login'>Sign in.</Link></p> -->
-      <p>Already have an account? <a routerLink='/login' id='to-login'>Sign in.</a></p>
-    </div>
+      </div>
+      <label htmlFor='pfp'>Profile Pic</label>
+      <div class='input-field'>
+        <input type='text' id='profile-pic' name='profilePic' formControlName="profilePic" />
+      </div>
+      <input type='submit' value='Sign up' class='btn-main btn-submit' />
+    </form>
+    <div class='divider'></div>
+    <p>Already have an account? <a routerLink='/login' id='to-login'>Sign in.</a></p>
   </div>
+</div>

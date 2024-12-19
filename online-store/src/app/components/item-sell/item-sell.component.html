@@ -4,17 +4,17 @@
         <form [formGroup]="itemSellForm" (ngSubmit)="SellItem()">
             <label htmlFor="title">Title</label>
             <div class="input-field">
-                <input type="text" id="title" name="title" required formControlName="title"/>
+                <input type="text" id="title" name="title" formControlName="title"/>
                 <!-- {errors.title && <span class='error-text'>{errors.title}</span>} -->
             </div>
             <label htmlFor="price">Price</label>
             <div class="input-field">
-                <input type="number" id="price" name="price" required formControlName="price"/>
+                <input type="number" id="price" name="price" formControlName="price"/>
                 <!-- {errors.price && <span class='error-text'>{errors.price}</span>} -->
             </div>
             <label htmlFor="category">Category</label>
             <div class="input-field">
-                <select id="select-input" name="category" required formControlName="category">
+                <select id="select-input" name="category" formControlName="category">
                     <option value="" selected disabled hidden>Choose a category</option>
                     <option value="Clothing">Clothing</option>
                     <option value="Electronics">Electronics</option>
@@ -26,7 +26,7 @@
             </div>
             <label htmlFor="description">Item Description</label>
             <div class="input-field">
-                <input type="text" id="description" name="description" required formControlName="description"/>
+                <input type="text" id="description" name="description" formControlName="description"/>
                 <!-- {errors.description && <span class='error-text'>{errors.description}</span>} -->
             </div>
             <label htmlFor="imageUrl">Photo of Item</label>
